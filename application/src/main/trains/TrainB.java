@@ -2,7 +2,7 @@ package main.trains;
 
 import main.stations.StationAB;
 
-public class TrainB implements Train, Runnable {
+public class TrainB extends Train implements Runnable {
     private final String NOM = "TrainB";
     private long id;
     private StationAB stationAB;
@@ -24,6 +24,9 @@ public class TrainB implements Train, Runnable {
 
     @Override
     public void run() {
+        delai();
+        panne();
+        delai();
         stationAB.traverseStation(this);
     }
 }
