@@ -29,15 +29,15 @@ public class StationAB {
     }
 
     private void traceArriveStationTrain(Train train) {
-        System.out.printf("%s arrive à la station AB", train.getIdentifiantComplet());
+        System.out.printf("\n%s arrive à la station AB", train.getIdentifiantComplet());
     }
 
     private void traceTraverseStationTrain(Train train) {
-        System.out.printf("%s traverse la station AB", train.getIdentifiantComplet());
+        System.out.printf("\n%s traverse la station AB", train.getIdentifiantComplet());
     }
 
     private void traceSortStationTrain(Train train) {
-        System.out.printf("%s sort de la station AB", train.getIdentifiantComplet());
+        System.out.printf("\n%s sort de la station AB", train.getIdentifiantComplet());
 
     }
 }

@@ -20,7 +20,7 @@ public class ConvoiTrainB implements Runnable {
             trainB.setId(thread.getId());
             thread.start();
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(4);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
