@@ -16,9 +16,9 @@ public class StationAB {
 
     public void traverseStation(Train train){
         try {
-            traceArriveStationTrain(train);
+            traceRequeteStationTrain(train);
             this.SEMAPHORE.acquire();
-            traceTraverseStationTrain(train);
+            traceEntreStationTrain(train);
             TimeUnit.SECONDS.sleep(DUREE_ATTENTE_STATION);
         } catch (InterruptedException e){
 
@@ -28,16 +28,15 @@ public class StationAB {
         }
     }
 
-    private void traceArriveStationTrain(Train train) {
-        System.out.printf("\n%s arrive à la station AB", train.getIdentifiantComplet());
+    private void traceRequeteStationTrain(Train train) {
+        System.out.printf("\n%s requête à la station AB", train.getIdentifiantComplet());
     }
 
-    private void traceTraverseStationTrain(Train train) {
-        System.out.printf("\n%s traverse la station AB", train.getIdentifiantComplet());
+    private void traceEntreStationTrain(Train train) {
+        System.out.printf("\n%s entre dans la station AB", train.getIdentifiantComplet());
     }
 
     private void traceSortStationTrain(Train train) {
         System.out.printf("\n%s sort de la station AB", train.getIdentifiantComplet());
-
     }
 }
