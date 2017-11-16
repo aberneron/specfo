@@ -1,5 +1,6 @@
 package main.trains;
 
+import main.convois.ConvoiTrainA;
 import main.stations.StationAB;
 
 import java.sql.Time;
@@ -9,10 +10,10 @@ public class TrainA extends Train implements Runnable {
 
     private final String NOM = "TrainA";
     private long id;
-    private StationAB stationAB;
+    private ConvoiTrainA convoiTrain;
 
-    public TrainA (StationAB stationAB) {
-        this.stationAB = stationAB;
+    public TrainA (ConvoiTrainA convoiTrain) {
+        this.convoiTrain = convoiTrain;
         this.id = 0;
     }
 
@@ -29,11 +30,11 @@ public class TrainA extends Train implements Runnable {
     @Override
     public void run() {
         delai();
-        panne();
+        convoiTrain.panneSegment(1,this);
+        convoiTrain.traverserStationAB(this);
         delai();
-        stationAB.traverseStation(this);
-        
-        //etc..
+        convoiTrain.panneSegment(2,this);
+        //convoiTrain.traverserStationABC(this);
     }    
     
 

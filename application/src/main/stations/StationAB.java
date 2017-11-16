@@ -16,15 +16,20 @@ public class StationAB {
 
     public void traverseStation(Train train){
         try {
+
             traceRequeteStationTrain(train);
             this.SEMAPHORE.acquire();
+
             traceEntreStationTrain(train);
             TimeUnit.SECONDS.sleep(DUREE_ATTENTE_STATION);
+
         } catch (InterruptedException e){
 
         } finally {
-            traceSortStationTrain(train);
+
             this.SEMAPHORE.release();
+            traceSortStationTrain(train);
+
         }
     }
 
