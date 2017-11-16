@@ -7,10 +7,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Panne {
     private static final int MAX_TRAINS = 1;
-    private static final int TEMPS_REPARATION = 6;
+    private static final int TEMPS_REPARATION = 7;
     private static final int TEMPS_PANNE = 1;
-    private static final double CHANCE_PANNE = 0.30d;
-    private static final double CHANCE_REPARATION = 0.70d;
+    private static final double CHANCE_PANNE = 0.20d;
+    private static final double CHANCE_REPARATION = 0.30d;
     private final Semaphore SEMAPHORE;
     private long id;
 
@@ -27,6 +27,7 @@ public class Panne {
                 traceTrainEnPanne(train);
                 TimeUnit.SECONDS.sleep(TEMPS_PANNE);
 
+                probabilite = Math.random();
                 while (probabilite > CHANCE_REPARATION) {
                     probabilite = Math.random();
                 }
