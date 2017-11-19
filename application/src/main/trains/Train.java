@@ -3,11 +3,12 @@ package main.trains;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Train {
-    private static final int TEMPS_DELAI = 2;
-    private static final double CHANCE_DELAI = 0.50d;
+    private static final int TEMPS_DELAI = 1;
+    private static final double CHANCE_DELAI = 0.10d;
 
     public abstract String getIdentifiantComplet();
-
+    public abstract int getConvoiId();
+    public abstract long getTrainId();
     public abstract void setId(long id);
 
     protected void delai() {

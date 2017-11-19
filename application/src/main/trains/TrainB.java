@@ -19,6 +19,16 @@ public class TrainB extends Train implements Runnable {
     }
 
     @Override
+    public int getConvoiId() {
+        return this.convoiTrain.getConvoiId();
+    }
+
+    @Override
+    public long getTrainId() {
+        return this.id;
+    }
+
+    @Override
     public void setId(long id) {
         this.id = id;
     }
@@ -28,11 +38,11 @@ public class TrainB extends Train implements Runnable {
         delai();
         convoiTrain.panneSegment(1,this);
         convoiTrain.traverserStationAB(this);
-        delai();
-        convoiTrain.panneSegment(2,this);
+        //delai();
+        //convoiTrain.panneSegment(2,this);
         //station BC
-        delai();
-        convoiTrain.panneSegment(3,this);
+        //delai();
+        //convoiTrain.panneSegment(3,this);
         //station ABC
     }
 }

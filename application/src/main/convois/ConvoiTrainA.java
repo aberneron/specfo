@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainA implements Runnable {
-    private static final int MAX_TRAIN_A = 2;
-    private static final int TEMPS_NOUVEAU_TRAINA = 5;
+    private static final int MAX_TRAIN_A = 4;
+    private static final int TEMPS_NOUVEAU_TRAINA = 2;
+    private static final int convoiId = 1;
 
     private ArrayList<Panne> Pannes;
     private final StationAB stationAB;
@@ -30,13 +31,17 @@ public class ConvoiTrainA implements Runnable {
         this.stationAB.traverseStation(trainA);
     }
 
+    public int getConvoiId() {
+        return this.convoiId;
+    }
+
     @Override
     public void run() {
         int i = 0;
         while (i < this.MAX_TRAIN_A) {
             TrainA trainA = new TrainA(this);
             Thread thread = new Thread(trainA);
-            trainA.setId(i+1);
+            trainA.setId(i + 1);
             thread.start();
             try {
                 TimeUnit.SECONDS.sleep(this.TEMPS_NOUVEAU_TRAINA);

@@ -2,21 +2,22 @@ package main.convois;
 
 import main.Panne;
 import main.stations.StationAB;
-import main.trains.TrainA;
 import main.trains.TrainB;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainB implements Runnable {
-    private static final int MAX_TRAIN_B = 2;
-    private static final int TEMPS_NOUVEAU_TRAINB = 5;
+    private static final int MAX_TRAIN_B = 4;
+    private static final int TEMPS_NOUVEAU_TRAINB = 2;
+    private static final int convoiId = 2;
 
     private ArrayList<Panne> Pannes;
     private final StationAB stationAB;
+    //private final StationBC stationBC;
     //private final StationABC stationABC;
 
-    public ConvoiTrainB (StationAB stationAB) {
+    public ConvoiTrainB(StationAB stationAB) {
         this.stationAB = stationAB;
         this.Pannes = new ArrayList<Panne>();
         this.Pannes.add(new Panne(1));
@@ -25,11 +26,15 @@ public class ConvoiTrainB implements Runnable {
     }
 
     public void panneSegment(int segment, TrainB trainB) {
-        this.Pannes.get(segment-1).panne(trainB);
+        this.Pannes.get(segment - 1).panne(trainB);
     }
 
     public void traverserStationAB(TrainB trainB) {
         this.stationAB.traverseStation(trainB);
+    }
+
+    public int getConvoiId() {
+        return this.convoiId;
     }
 
     @Override
@@ -38,7 +43,7 @@ public class ConvoiTrainB implements Runnable {
         while (i < this.MAX_TRAIN_B) {
             TrainB trainB = new TrainB(this);
             Thread thread = new Thread(trainB);
-            trainB.setId(i+1);
+            trainB.setId(i + 1);
             thread.start();
             try {
                 TimeUnit.SECONDS.sleep(this.TEMPS_NOUVEAU_TRAINB);
