@@ -7,16 +7,21 @@ import java.util.concurrent.TimeUnit;
 
 public class Panne {
     private static final int MAX_TRAINS = 1;
-    private static final int TEMPS_REPARATION = 7;
+
     private static final int TEMPS_PANNE = 1;
     private static final double CHANCE_PANNE = 0.20d;
-    private static final double CHANCE_REPARATION = 0.30d;
-    private final Semaphore SEMAPHORE;
-    private long id;
 
-    public Panne(int id) {
+    private static final int TEMPS_REPARATION = 7;
+    private static final int TEMPS_APPEL_REPARATION = 1;
+    private static final double CHANCE_REPARATION = 0.30d;
+
+    private final Semaphore SEMAPHORE;
+
+    private String nomSegment;
+
+    public Panne(String nomSegment) {
         this.SEMAPHORE = new Semaphore(this.MAX_TRAINS);
-        this.id = id;
+        this.nomSegment = nomSegment;
     }
 
     public void panne(Train train) {
@@ -26,14 +31,7 @@ public class Panne {
                 this.SEMAPHORE.acquire();
                 traceTrainEnPanne(train);
                 TimeUnit.SECONDS.sleep(TEMPS_PANNE);
-
-                probabilite = Math.random();
-                while (probabilite > CHANCE_REPARATION) {
-                    probabilite = Math.random();
-                }
-
-                traceTrainEnReparation(train);
-                TimeUnit.SECONDS.sleep(TEMPS_REPARATION);
+                reparation(train);
 
             } catch (InterruptedException e) {
             } finally {
@@ -43,8 +41,20 @@ public class Panne {
         }
     }
 
+    private void reparation(Train train) throws InterruptedException {
+        double probabilite = Math.random();
+
+        while (probabilite > CHANCE_REPARATION) {
+            probabilite = Math.random();
+            TimeUnit.SECONDS.sleep(TEMPS_APPEL_REPARATION);
+        }
+
+        traceTrainEnReparation(train);
+        TimeUnit.SECONDS.sleep(TEMPS_REPARATION);
+    }
+
     private void traceTrainEnPanne(Train train) {
-        System.out.printf("\n%s tombe en panne sur segment %s", train.getIdentifiantComplet(), id);
+        System.out.printf("\n%s tombe en panne sur segment %s", train.getIdentifiantComplet(), this.nomSegment);
     }
 
     private void traceTrainEnReparation(Train train) {

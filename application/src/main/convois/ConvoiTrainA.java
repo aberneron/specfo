@@ -4,27 +4,37 @@ import main.Panne;
 import main.stations.StationAB;
 import main.trains.TrainA;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainA implements Runnable {
-    private static final int MAX_TRAIN_A = 4;
     private static final int TEMPS_NOUVEAU_TRAINA = 2;
     private static final int convoiId = 1;
 
-    private ArrayList<Panne> Pannes;
+    private final int nbTrainA;
     private final StationAB stationAB;
     //private final StationABC stationABC;
 
-    public ConvoiTrainA(StationAB stationAB) {
+    private Panne panneAB;
+    private Panne panneABC;
+
+    public ConvoiTrainA(int nbTrainA, StationAB stationAB) {
+        this.nbTrainA = nbTrainA;
         this.stationAB = stationAB;
-        this.Pannes = new ArrayList<Panne>();
-        this.Pannes.add(new Panne(1));
-        this.Pannes.add(new Panne(2));
+
+        this.panneAB = new Panne("AB");
+        this.panneABC = new Panne("ABC");
     }
 
-    public void panneSegment(int segment, TrainA trainA) {
-        this.Pannes.get(segment - 1).panne(trainA);
+    public void panneSegmentAB(TrainA trainA) {
+        panneSegment(this.panneAB, trainA);
+    }
+
+    public void panneSegmentABC(TrainA trainA) {
+        panneSegment(this.panneABC, trainA);
+    }
+
+    private void panneSegment(Panne panneSegment, TrainA trainA) {
+        panneSegment.panne(trainA);
     }
 
     public void traverserStationAB(TrainA trainA) {
@@ -38,7 +48,7 @@ public class ConvoiTrainA implements Runnable {
     @Override
     public void run() {
         int i = 0;
-        while (i < this.MAX_TRAIN_A) {
+        while (i < this.nbTrainA) {
             TrainA trainA = new TrainA(this);
             Thread thread = new Thread(trainA);
             trainA.setId(i + 1);
@@ -51,5 +61,4 @@ public class ConvoiTrainA implements Runnable {
             }
         }
     }
-
 }

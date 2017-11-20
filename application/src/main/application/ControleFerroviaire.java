@@ -6,11 +6,16 @@ import main.stations.StationAB;
 
 public class ControleFerroviaire {
     public static void main(String [] args) {
+
+        int nbTrainA = 4;
+
         final StationAB stationAB = new StationAB();
 
-        Thread convoiTrainA = new Thread(new ConvoiTrainA(stationAB));
-        Thread convoiTrainB = new Thread(new ConvoiTrainB(stationAB));
+        Thread convoiTrainA = new Thread(new ConvoiTrainA(nbTrainA, stationAB));
         convoiTrainA.start();
-        convoiTrainB.start();
+
+        //Thread convoiTrainB = new Thread(new ConvoiTrainB(stationAB));
+
+        //convoiTrainB.start();
     }
 }

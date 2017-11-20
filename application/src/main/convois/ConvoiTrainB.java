@@ -4,29 +4,44 @@ import main.Panne;
 import main.stations.StationAB;
 import main.trains.TrainB;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainB implements Runnable {
-    private static final int MAX_TRAIN_B = 4;
     private static final int TEMPS_NOUVEAU_TRAINB = 2;
     private static final int convoiId = 2;
 
-    private ArrayList<Panne> Pannes;
+    private final int nbTrainB;
     private final StationAB stationAB;
     //private final StationBC stationBC;
     //private final StationABC stationABC;
 
-    public ConvoiTrainB(StationAB stationAB) {
+    private Panne panneAB;
+    private Panne panneBC;
+    private Panne panneABC;
+
+    public ConvoiTrainB(int nbTrainB, StationAB stationAB) {
+        this.nbTrainB = nbTrainB;
         this.stationAB = stationAB;
-        this.Pannes = new ArrayList<Panne>();
-        this.Pannes.add(new Panne(1));
-        this.Pannes.add(new Panne(2));
-        this.Pannes.add(new Panne(3));
+
+        this.panneAB = new Panne("AB");
+        this.panneBC = new Panne("BC");
+        this.panneABC = new Panne("ABC");
     }
 
-    public void panneSegment(int segment, TrainB trainB) {
-        this.Pannes.get(segment - 1).panne(trainB);
+    public void panneSegmentAB(TrainB trainB) {
+        panneSegment(this.panneAB, trainB);
+    }
+
+    public void panneSegmentBC(TrainB trainB) {
+        panneSegment(this.panneBC, trainB);
+    }
+
+    public void panneSegmentABC(TrainB trainB) {
+        panneSegment(this.panneABC, trainB);
+    }
+
+    private void panneSegment(Panne panneSegment, TrainB trainB) {
+        panneSegment.panne(trainB);
     }
 
     public void traverserStationAB(TrainB trainB) {
@@ -40,7 +55,7 @@ public class ConvoiTrainB implements Runnable {
     @Override
     public void run() {
         int i = 0;
-        while (i < this.MAX_TRAIN_B) {
+        while (i < this.nbTrainB) {
             TrainB trainB = new TrainB(this);
             Thread thread = new Thread(trainB);
             trainB.setId(i + 1);
