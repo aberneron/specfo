@@ -21,7 +21,7 @@ Pour chaque événement de l'application, soit le délai ou la panne, des probab
 pour savoir si l'événement va survenir.
 
 ### Délai
-La probabilité de délai fonctionne comme suit : Il y a 10% de chance qu'elle survienne avant qu'un train
+La probabilité de délai fonctionne comme suit : Il y a 30% de chance qu'elle survienne avant qu'un train
 entre dans une station. Le délai est de 1 seconde et peut se reproduire plusieurs fois de suite.
 Le code du délai se trouve dans la classe "Train".
 

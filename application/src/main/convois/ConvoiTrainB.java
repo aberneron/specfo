@@ -71,6 +71,7 @@ public class ConvoiTrainB implements Runnable {
             TrainB trainB = new TrainB(this);
             Thread thread = new Thread(trainB);
             trainB.setId(i);
+            thread.setPriority(Thread.MAX_PRIORITY);
             thread.start();
             try {
                 TimeUnit.SECONDS.sleep(this.TEMPS_NOUVEAU_TRAINB);

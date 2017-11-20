@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class Train {
     private static final int TEMPS_DELAI = 1;
-    private static final double CHANCE_DELAI = 0.10d;
+    private static final double CHANCE_DELAI = 0.30d;
 
     public abstract String getIdentifiantComplet();
 

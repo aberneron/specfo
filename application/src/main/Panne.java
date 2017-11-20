@@ -58,10 +58,10 @@ public class Panne {
     }
 
     private void traceTrainEnReparation(Train train) {
-        System.out.printf("\n%s en rÃ©paration pour %s secondes", train.getIdentifiantComplet(), TEMPS_REPARATION);
+        System.out.printf("\n%s en réparation pour %s secondes", train.getIdentifiantComplet(), TEMPS_REPARATION);
     }
 
     private void traceTrainRepare(Train train) {
-        System.out.printf("\n%s est rÃ©parÃ©", train.getIdentifiantComplet());
+        System.out.printf("\n%s est réparé", train.getIdentifiantComplet());
     }
 }

@@ -107,7 +107,7 @@ public class StationABC {
     }
 
     private void traceRequeteStationTrain(Train train) {
-        System.out.printf("\n%s requÃªte Ã  la station ABC", train.getIdentifiantComplet());
+        System.out.printf("\n%s requête à la station ABC", train.getIdentifiantComplet());
     }
 
     private void traceEntreStationTrain(Train train) {
