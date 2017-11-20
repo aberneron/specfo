@@ -20,7 +20,7 @@ public class StationABC {
     public StationABC() {
         this.SEMAPHORE = new Semaphore(this.MAX_TRAIN_TYPE_STATION);
 
-        //Initialisation de la map qui controle l'ordre d'entree et de sortie des trains
+        //Initialisation de la map qui contrôle l'ordre d'entrée et de sortie des trains
         this.prochainTrainEntree.put(0, 1);
         this.prochainTrainEntree.put(1, 1);
         this.prochainTrainEntree.put(2, 1);
@@ -33,7 +33,7 @@ public class StationABC {
         try {
             traceRequeteStationTrain(train);
 
-            //Tant que se n'est pas Ã  ce train d'entrÃ©e, on attend
+            //Tant que se n'est pas à  ce train d'entrer, on attend
             while (!trainEntreSansDepassement(train)) {
                 TimeUnit.SECONDS.sleep(DUREE_ATTENTE_STATION);
             }
@@ -41,7 +41,7 @@ public class StationABC {
 
             TimeUnit.SECONDS.sleep(TEMPS_STATION);
 
-            //Tant que se n'est pas Ã  ce train de sortire, on attend
+            //Tant que se n'est pas à ce train de sortir, on attend
             while (!trainSortSansDepassement(train)) {
                 TimeUnit.SECONDS.sleep(DUREE_ATTENTE_STATION);
             }
@@ -60,15 +60,15 @@ public class StationABC {
     private void tourConvoiTrain(Train train) {
         try {
             if (this.convoiTrainCourrant == 0) {
-                //S'il n'y a pas de train dans la station, on peut entrÃ©e
+            	//S'il n'y a pas de train dans la station, on peut entrer
                 this.convoiTrainCourrant = train.getConvoiId();
                 this.SEMAPHORE.acquire();
                 trainEntre(train);
             } else if (this.convoiTrainCourrant == train.getConvoiId()) {
-                //S'il y a dÃ©jÃ  un train du mÃªme type
+            	//S'il y a déjà  un train du même type
                 trainEntre(train);
             } else {
-                //Train de type diffÃ©rents doivent attendre leur tour
+            	//Train de type différents doivent attendre leur tour
                 traceAttendreStation(train);
                 TimeUnit.SECONDS.sleep(DUREE_ATTENTE_STATION);
                 this.SEMAPHORE.acquire();
