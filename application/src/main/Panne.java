@@ -13,7 +13,7 @@ public class Panne {
 
     private static final int TEMPS_REPARATION = 7;
     private static final int TEMPS_APPEL_REPARATION = 1;
-    private static final double CHANCE_REPARATION = 0.30d;
+    private static final double CHANCE_REPARATION = 0.50d;
 
     private final Semaphore SEMAPHORE;
 
