@@ -34,12 +34,12 @@ public class TrainA extends Train implements Runnable {
 
     @Override
     public void run() {
-        delai();
-        convoiTrain.panneSegmentAB(this);
+        //delai();
+        //convoiTrain.panneSegmentAB(this);
         convoiTrain.traverseStationAB(this);
 
-        delai();
-        convoiTrain.panneSegmentABC(this);
+        //delai();
+        //convoiTrain.panneSegmentABC(this);
         convoiTrain.traverseStationABC(this);
     }
 }
