@@ -8,13 +8,11 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class StationABC {
+    private static int convoiTrainCourrant = 0;
     private final int MAX_TRAIN_TYPE_STATION = 1;
     private final long DUREE_ATTENTE_STATION = 1;
     private final long TEMPS_STATION = 4;
     private final Semaphore SEMAPHORE;
-
-    private static int convoiTrainCourrant = 0;
-
     private int nombreTrain = 0;
     private Map<Integer, Integer> prochainTrainEntree = new HashMap<Integer, Integer>();
     private Map<Integer, Integer> prochainTrainSortie = new HashMap<Integer, Integer>();
@@ -22,12 +20,12 @@ public class StationABC {
     public StationABC() {
         this.SEMAPHORE = new Semaphore(this.MAX_TRAIN_TYPE_STATION);
 
-        this.prochainTrainEntree.put(0,1);
-        this.prochainTrainEntree.put(1,1);
-        this.prochainTrainEntree.put(2,1);
-        this.prochainTrainSortie.put(0,1);
-        this.prochainTrainSortie.put(1,1);
-        this.prochainTrainSortie.put(2,1);
+        this.prochainTrainEntree.put(0, 1);
+        this.prochainTrainEntree.put(1, 1);
+        this.prochainTrainEntree.put(2, 1);
+        this.prochainTrainSortie.put(0, 1);
+        this.prochainTrainSortie.put(1, 1);
+        this.prochainTrainSortie.put(2, 1);
     }
 
     public void traverseStation(Train train) {
@@ -93,13 +91,13 @@ public class StationABC {
     }
 
     private void trainEntre(Train train) {
-        this.prochainTrainEntree.put(train.getConvoiId(), this.prochainTrainEntree.get(train.getConvoiId())+1);
+        this.prochainTrainEntree.put(train.getConvoiId(), this.prochainTrainEntree.get(train.getConvoiId()) + 1);
         this.nombreTrain++;
         traceEntreStationTrain(train);
     }
 
     private void trainSort(Train train) {
-        this.prochainTrainSortie.put(train.getConvoiId(), this.prochainTrainSortie.get(train.getConvoiId())+1);
+        this.prochainTrainSortie.put(train.getConvoiId(), this.prochainTrainSortie.get(train.getConvoiId()) + 1);
         this.nombreTrain--;
         traceSortStationTrain(train);
     }

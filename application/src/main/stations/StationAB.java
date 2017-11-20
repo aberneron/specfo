@@ -8,13 +8,11 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class StationAB {
+    private static int convoiTrainCourrant = 0;
     private final int MAX_TRAIN_TYPE_STATION = 1;
     private final long DUREE_ATTENTE_STATION = 1;
     private final long TEMPS_STATION = 4;
     private final Semaphore SEMAPHORE;
-
-    private static int convoiTrainCourrant = 0;
-
     private int nombreTrain = 0;
     private Map<Integer, Integer> prochainTrainEntree = new HashMap<Integer, Integer>();
     private Map<Integer, Integer> prochainTrainSortie = new HashMap<Integer, Integer>();
