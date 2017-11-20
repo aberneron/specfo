@@ -58,6 +58,7 @@ public class ConvoiTrainA implements Runnable {
             TrainA trainA = new TrainA(this);
             Thread thread = new Thread(trainA);
             trainA.setId(i);
+            thread.setPriority(Thread.MIN_PRIORITY);
             thread.start();
             try {
                 TimeUnit.SECONDS.sleep(this.TEMPS_NOUVEAU_TRAINA);
