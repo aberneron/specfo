@@ -20,6 +20,7 @@ public class StationAB {
     public StationAB() {
         this.SEMAPHORE = new Semaphore(this.MAX_TRAIN_TYPE_STATION);
 
+        //Initialisation de la map qui controle l'ordre d'entree et de sortie des trains
         this.prochainTrainEntree.put(0, 1);
         this.prochainTrainEntree.put(1, 1);
         this.prochainTrainSortie.put(0, 1);
@@ -29,13 +30,17 @@ public class StationAB {
     public void traverseStation(Train train) {
         try {
             traceRequeteStationTrain(train);
+
+            //Tant que se n'est pas à ce train d'entrée, on attend
             while (!trainEntreSansDepassement(train)) {
                 TimeUnit.SECONDS.sleep(DUREE_ATTENTE_STATION);
             }
+
             tourConvoiTrain(train);
 
             TimeUnit.SECONDS.sleep(TEMPS_STATION);
 
+            //Tant que se n'est pas à ce train de sortire, on attend
             while (!trainSortSansDepassement(train)) {
                 TimeUnit.SECONDS.sleep(DUREE_ATTENTE_STATION);
             }
@@ -54,18 +59,18 @@ public class StationAB {
     private void tourConvoiTrain(Train train) {
         try {
             if (this.convoiTrainCourrant == 0) {
+                //S'il n'y a pas de train dans la station, on peut entrée
                 this.convoiTrainCourrant = train.getConvoiId();
                 this.SEMAPHORE.acquire();
                 trainEntre(train);
-
             } else if (this.convoiTrainCourrant == train.getConvoiId()) {
-
+                //S'il y a déjà un train du même type
                 trainEntre(train);
-            } else { //wrong train need to wait.
+            } else {
+                //Train de type différents doivent attendre leur tour
                 traceAttendreStation(train);
                 TimeUnit.SECONDS.sleep(DUREE_ATTENTE_STATION);
                 this.SEMAPHORE.acquire();
-
                 this.convoiTrainCourrant = train.getConvoiId();
                 trainEntre(train);
             }
@@ -90,13 +95,11 @@ public class StationAB {
 
     private void trainEntre(Train train) {
         this.prochainTrainEntree.put(train.getConvoiId(), this.prochainTrainEntree.get(train.getConvoiId()) + 1);
-        this.nombreTrain++;
         traceEntreStationTrain(train);
     }
 
     private void trainSort(Train train) {
         this.prochainTrainSortie.put(train.getConvoiId(), this.prochainTrainSortie.get(train.getConvoiId()) + 1);
-        this.nombreTrain--;
         traceSortStationTrain(train);
     }
 
@@ -105,7 +108,7 @@ public class StationAB {
     }
 
     private void traceRequeteStationTrain(Train train) {
-        System.out.printf("\n%s requ�te � la station AB", train.getIdentifiantComplet());
+        System.out.printf("\n%s requ�te � la station AB", train.getIdentifiantComplet());
     }
 
     private void traceEntreStationTrain(Train train) {
