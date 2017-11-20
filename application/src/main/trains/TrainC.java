@@ -1,13 +1,13 @@
 package main.trains;
 
-import main.convois.ConvoiTrainA;
+import main.convois.ConvoiTrainC;
 
-public class TrainA extends Train implements Runnable {
-    private final String NOM = "TrainA";
+public class TrainC extends Train implements Runnable {
+    private final String NOM = "TrainC";
     private long id;
-    private ConvoiTrainA convoiTrain;
+    private ConvoiTrainC convoiTrain;
 
-    public TrainA(ConvoiTrainA convoiTrain) {
+    public TrainC(ConvoiTrainC convoiTrain) {
         this.convoiTrain = convoiTrain;
         this.id = 0;
     }
@@ -35,8 +35,8 @@ public class TrainA extends Train implements Runnable {
     @Override
     public void run() {
         delai();
-        convoiTrain.panneSegmentAB(this);
-        convoiTrain.traverseStationAB(this);
+        convoiTrain.panneSegmentBC(this);
+        convoiTrain.traverseStationBC(this);
 
         delai();
         convoiTrain.panneSegmentABC(this);

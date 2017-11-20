@@ -2,26 +2,30 @@ package main.convois;
 
 import main.Panne;
 import main.stations.StationAB;
+import main.stations.StationABC;
+import main.stations.StationBC;
 import main.trains.TrainB;
 
 import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainB implements Runnable {
     private static final int TEMPS_NOUVEAU_TRAINB = 2;
-    private static final int convoiId = 2;
+    private static final int ID = 2;
 
-    private final int nbTrainB;
-    private final StationAB stationAB;
-    //private final StationBC stationBC;
-    //private final StationABC stationABC;
+    private final int NB_TRAIN_B;
+    private final StationAB STATION_AB;
+    private final StationBC STATION_BC;
+    private final StationABC STATION_ABC;
 
     private Panne panneAB;
     private Panne panneBC;
     private Panne panneABC;
 
-    public ConvoiTrainB(int nbTrainB, StationAB stationAB) {
-        this.nbTrainB = nbTrainB;
-        this.stationAB = stationAB;
+    public ConvoiTrainB(int nbTrainB, StationAB stationAB, StationBC stationBC, StationABC stationABC) {
+        this.NB_TRAIN_B = nbTrainB;
+        this.STATION_AB = stationAB;
+        this.STATION_BC = stationBC;
+        this.STATION_ABC = stationABC;
 
         this.panneAB = new Panne("AB");
         this.panneBC = new Panne("BC");
@@ -44,18 +48,26 @@ public class ConvoiTrainB implements Runnable {
         panneSegment.panne(trainB);
     }
 
-    public void traverserStationAB(TrainB trainB) {
-        this.stationAB.traverseStation(trainB);
+    public void traverseStationAB(TrainB trainB) {
+        this.STATION_AB.traverseStation(trainB);
+    }
+
+    public void traverseStationBC(TrainB trainB) {
+        this.STATION_BC.traverseStation(trainB);
+    }
+
+    public void traverseStationABC(TrainB trainB) {
+        this.STATION_ABC.traverseStation(trainB);
     }
 
     public int getConvoiId() {
-        return this.convoiId;
+        return this.ID;
     }
 
     @Override
     public void run() {
         int i = 0;
-        while (i < this.nbTrainB) {
+        while (i < this.NB_TRAIN_B) {
             TrainB trainB = new TrainB(this);
             Thread thread = new Thread(trainB);
             trainB.setId(i + 1);

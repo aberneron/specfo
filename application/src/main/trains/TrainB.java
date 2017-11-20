@@ -36,12 +36,14 @@ public class TrainB extends Train implements Runnable {
     public void run() {
         delai();
         convoiTrain.panneSegmentAB(this);
-        convoiTrain.traverserStationAB(this);
-        //delai();
-        //convoiTrain.panneSegment(2,this);
-        //station BC
-        //delai();
-        //convoiTrain.panneSegment(3,this);
-        //station ABC
+        convoiTrain.traverseStationAB(this);
+
+        delai();
+        convoiTrain.panneSegmentBC(this);
+        convoiTrain.traverseStationBC(this);
+
+        delai();
+        convoiTrain.panneSegmentABC(this);
+        convoiTrain.traverseStationABC(this);
     }
 }

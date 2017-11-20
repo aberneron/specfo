@@ -5,13 +5,13 @@ import main.trains.Train;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-public class StationABC {
+public class StationBC {
     private final int MAX_TRAINS_STATION = 1;
     private final long DUREE_ATTENTE_STATION = 2;
 
     private final Semaphore SEMAPHORE;
 
-    public StationABC() {
+    public StationBC() {
         this.SEMAPHORE = new Semaphore(this.MAX_TRAINS_STATION);
     }
 
@@ -30,14 +30,14 @@ public class StationABC {
     }
 
     private void traceRequeteStationTrain(Train train) {
-        System.out.printf("\n%s requête à la station ABC", train.getIdentifiantComplet());
+        System.out.printf("\n%s requête à la station BC", train.getIdentifiantComplet());
     }
 
     private void traceEntreStationTrain(Train train) {
-        System.out.printf("\n%s entre dans la station ABC", train.getIdentifiantComplet());
+        System.out.printf("\n%s entre dans la station BC", train.getIdentifiantComplet());
     }
 
     private void traceSortStationTrain(Train train) {
-        System.out.printf("\n%s sort de la station ABC", train.getIdentifiantComplet());
+        System.out.printf("\n%s sort de la station BC", train.getIdentifiantComplet());
     }
 }

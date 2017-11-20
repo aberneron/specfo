@@ -2,24 +2,26 @@ package main.convois;
 
 import main.Panne;
 import main.stations.StationAB;
+import main.stations.StationABC;
 import main.trains.TrainA;
 
 import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainA implements Runnable {
     private static final int TEMPS_NOUVEAU_TRAINA = 2;
-    private static final int convoiId = 1;
+    private static final int ID = 1;
 
-    private final int nbTrainA;
-    private final StationAB stationAB;
-    //private final StationABC stationABC;
+    private final int NB_TRAIN_A;
+    private final StationAB STATION_AB;
+    private final StationABC STATION_ABC;
 
     private Panne panneAB;
     private Panne panneABC;
 
-    public ConvoiTrainA(int nbTrainA, StationAB stationAB) {
-        this.nbTrainA = nbTrainA;
-        this.stationAB = stationAB;
+    public ConvoiTrainA(int nbTrainA, StationAB stationAB, StationABC stationABC) {
+        this.NB_TRAIN_A = nbTrainA;
+        this.STATION_AB = stationAB;
+        this.STATION_ABC = stationABC;
 
         this.panneAB = new Panne("AB");
         this.panneABC = new Panne("ABC");
@@ -37,18 +39,22 @@ public class ConvoiTrainA implements Runnable {
         panneSegment.panne(trainA);
     }
 
-    public void traverserStationAB(TrainA trainA) {
-        this.stationAB.traverseStation(trainA);
+    public void traverseStationAB(TrainA trainA) {
+        this.STATION_AB.traverseStation(trainA);
+    }
+
+    public void traverseStationABC(TrainA trainA) {
+        this.STATION_ABC.traverseStation(trainA);
     }
 
     public int getConvoiId() {
-        return this.convoiId;
+        return this.ID;
     }
 
     @Override
     public void run() {
         int i = 0;
-        while (i < this.nbTrainA) {
+        while (i < this.NB_TRAIN_A) {
             TrainA trainA = new TrainA(this);
             Thread thread = new Thread(trainA);
             trainA.setId(i + 1);
