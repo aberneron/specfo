@@ -8,8 +8,8 @@ import main.trains.TrainC;
 import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainC implements Runnable {
-    private static final int TEMPS_NOUVEAU_TRAINA = 2;
-    private static final int ID = 3;
+    private static final int TEMPS_NOUVEAU_TRAINC = 2;
+    private static final int ID = 2;
 
     private final int NB_TRAIN_C;
     private final StationBC STATION_BC;
@@ -53,14 +53,14 @@ public class ConvoiTrainC implements Runnable {
 
     @Override
     public void run() {
-        int i = 0;
-        while (i < this.NB_TRAIN_C) {
+        int i = 1;
+        while (i <= this.NB_TRAIN_C) {
             TrainC trainC = new TrainC(this);
             Thread thread = new Thread(trainC);
-            trainC.setId(i + 1);
+            trainC.setId(i);
             thread.start();
             try {
-                TimeUnit.SECONDS.sleep(this.TEMPS_NOUVEAU_TRAINA);
+                TimeUnit.SECONDS.sleep(this.TEMPS_NOUVEAU_TRAINC);
                 i++;
             } catch (InterruptedException e) {
                 e.printStackTrace();

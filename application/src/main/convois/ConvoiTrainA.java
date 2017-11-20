@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainA implements Runnable {
     private static final int TEMPS_NOUVEAU_TRAINA = 2;
-    private static final int ID = 1;
+    private static final int ID = 0;
 
     private final int NB_TRAIN_A;
     private final StationAB STATION_AB;
@@ -53,11 +53,11 @@ public class ConvoiTrainA implements Runnable {
 
     @Override
     public void run() {
-        int i = 0;
-        while (i < this.NB_TRAIN_A) {
+        int i = 1;
+        while (i <= this.NB_TRAIN_A) {
             TrainA trainA = new TrainA(this);
             Thread thread = new Thread(trainA);
-            trainA.setId(i + 1);
+            trainA.setId(i);
             thread.start();
             try {
                 TimeUnit.SECONDS.sleep(this.TEMPS_NOUVEAU_TRAINA);

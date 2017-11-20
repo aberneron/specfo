@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ConvoiTrainB implements Runnable {
     private static final int TEMPS_NOUVEAU_TRAINB = 2;
-    private static final int ID = 2;
+    private static final int ID = 1;
 
     private final int NB_TRAIN_B;
     private final StationAB STATION_AB;
@@ -66,11 +66,11 @@ public class ConvoiTrainB implements Runnable {
 
     @Override
     public void run() {
-        int i = 0;
-        while (i < this.NB_TRAIN_B) {
+        int i = 1;
+        while (i <= this.NB_TRAIN_B) {
             TrainB trainB = new TrainB(this);
             Thread thread = new Thread(trainB);
-            trainB.setId(i + 1);
+            trainB.setId(i);
             thread.start();
             try {
                 TimeUnit.SECONDS.sleep(this.TEMPS_NOUVEAU_TRAINB);

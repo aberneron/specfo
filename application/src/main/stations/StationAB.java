@@ -83,27 +83,27 @@ public class StationAB {
     }
 
     private boolean trainEntreSansDepassement(Train train) {
-        if (this.prochainTrainEntre[train.getConvoiId() - 1] == train.getTrainId())
+        if (this.prochainTrainEntre[train.getConvoiId()] == train.getTrainId())
             return true;
         else
             return false;
     }
 
     private boolean trainSortSansDepassement(Train train) {
-        if (this.prochainTrainSort[train.getConvoiId() - 1] == train.getTrainId())
+        if (this.prochainTrainSort[train.getConvoiId()] == train.getTrainId())
             return true;
         else
             return false;
     }
 
     private void trainEntre(Train train) {
-        this.prochainTrainEntre[train.getConvoiId() - 1]++;
+        this.prochainTrainEntre[train.getConvoiId()]++;
         this.nombreTrain++;
         traceEntreStationTrain(train);
     }
 
     private void trainSort(Train train) {
-        this.prochainTrainSort[train.getConvoiId() - 1]++;
+        this.prochainTrainSort[train.getConvoiId()]++;
         this.nombreTrain--;
         traceSortStationTrain(train);
     }

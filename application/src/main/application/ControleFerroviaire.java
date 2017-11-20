@@ -7,12 +7,37 @@ import main.stations.StationAB;
 import main.stations.StationABC;
 import main.stations.StationBC;
 
-public class ControleFerroviaire {
-    public static void main(String [] args) {
+import java.util.Scanner;
 
-        int nbTrainA = 3;
-        int nbTrainB = 3;
-        int nbTrainC = 3;
+public class ControleFerroviaire {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int nbTrainA = 0;
+        int nbTrainB = 0;
+        int nbTrainC = 0;
+
+        try {
+            System.out.print("Entrer le nombre de train A:");
+            nbTrainA = Integer.parseInt(scanner.nextLine());
+        } catch (Exception e) {
+            System.out.print("Impossible de lire le nombre de train A.");
+        }
+
+        try {
+            System.out.print("Entrer le nombre de train B:");
+            nbTrainB = Integer.parseInt(scanner.nextLine());
+        } catch (Exception e) {
+            System.out.print("Impossible de lire le nombre de train B.");
+        }
+
+        try {
+            System.out.print("Entrer le nombre de train C:");
+            nbTrainC = Integer.parseInt(scanner.nextLine());
+        } catch (Exception e) {
+            System.out.print("Impossible de lire le nombre de train C.");
+        }
 
         StationAB stationAB = new StationAB();
         StationBC stationBC = new StationBC();
@@ -23,7 +48,7 @@ public class ControleFerroviaire {
         Thread convoiTrainC = new Thread(new ConvoiTrainC(nbTrainC, stationBC, stationABC));
 
         convoiTrainA.start();
-        //convoiTrainB.start();
-        //convoiTrainC.start();
+        convoiTrainB.start();
+        convoiTrainC.start();
     }
 }
