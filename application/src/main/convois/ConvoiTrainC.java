@@ -51,6 +51,12 @@ public class ConvoiTrainC implements Runnable {
         return this.ID;
     }
 
+    /**
+     * Création successive des NB_TRAIN_C trains C.
+     * Chaque train C est géré par un thread avec une priorité maximum pour
+     * répondre à la spécification du LTS.
+     * On attend ensuite TEMPS_NOUVEAU_TRAINC secondes avant de créer le prochain train.
+     */
     @Override
     public void run() {
         int i = 1;
