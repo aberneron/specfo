@@ -1,9 +1,9 @@
 # GLO-3004 Spécification formelle et vérification de logiciels
-
+## Projet 1 étape 2
 Axel Berneron 111 104 436
-Marek Tremblay 111 100 094
+\nMarek Tremblay 111 100 094
 
-#Projet 1 étape 2
+
 ## Entrées de la console
 Nous demandons les entrées suivantes lors du lancement de l'application : 
 - Le nombre de trains A;
